@@ -10,15 +10,16 @@ class Form extends Component {
     }
 
     handleInputChange = (event) => {
-        console.log(event.currentTarget.value)
+        // console.log(event.currentTarget.value)
         // console.log(event.currentTarget.name)
+        // console.log(this.state.name)
         this.setState({ [event.currentTarget.name]: event.currentTarget.value })
 
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
+        //console.log(this.state);
         this.props.addNewContact(this.state)
     }
 
