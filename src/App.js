@@ -4,6 +4,8 @@ import shortid from 'shortid';
 import Form from './components/Form';
 import Contacts from './components/Contacts';
 import Filter from "./components/Filter";
+import styles from './App.module.css';
+
 
 class App extends Component {
   state = {
@@ -17,18 +19,15 @@ class App extends Component {
   }
 
   addNewContact = data => {
-    console.log(this.state.contacts)
-
+    // console.log(this.state.contacts)
     const contact = {
       id: shortid.generate(),
       name: data.name,
       number: data.number
     }
 
-    console.log(contact)
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts]
-
     }))
     console.log(this.state)
   }
@@ -36,7 +35,6 @@ class App extends Component {
   deleteContact = (contactId) => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-
     }))
   }
 
@@ -44,12 +42,11 @@ class App extends Component {
     this.setState({
       filter: event.currentTarget.value
     });
-    console.log(this.state.filter)
+    // console.log(this.state.filter)
   }
 
   visibleContacts = () => {
     const { filter, contacts } = this.state;
-
     return contacts.filter((contact) =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
@@ -58,17 +55,20 @@ class App extends Component {
 
 
   render() {
-
     const { filter, contacts } = this.state;
     const peapleInContact = this.visibleContacts();
 
     return (
       <>
-        <h1>Phonebook</h1>
-        <Form contacts={contacts} addNewContact={this.addNewContact} />
-        <h2>Contacts</h2>
-        <Filter value={filter} onChange={this.getFilterName} />
-        <Contacts contacts={peapleInContact} onDeleteContact={this.deleteContact} />
+        <div className={styles.container}>
+          <div className={styles.phonebook}>
+            <h1 className={styles.title}>Phonebook</h1>
+            <Form contacts={contacts} addNewContact={this.addNewContact} />
+            <h2 className={styles.titleContacts}>Contacts</h2>
+            <Filter value={filter} onChange={this.getFilterName} />
+            <Contacts contacts={peapleInContact} onDeleteContact={this.deleteContact} />
+          </div>
+        </div>
       </>
     )
   }
