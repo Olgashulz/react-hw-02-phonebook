@@ -4,23 +4,40 @@ import PropTypes from 'prop-types';
 
 class Form extends Component {
     state = {
-        contacts: [],
         name: '',
-        number: ''
+        number: '',
+    }
+
+    findNameInContact = (event) => {
+        console.log(event.currentTarget.value)
+        // console.log(this.props.contacts)
+
+        if (this.props.contacts.find((contact) =>
+            contact.name.toLowerCase() === event.currentTarget.value.toLowerCase()
+        )) {
+            return alert(`${event.currentTarget.value} is already in contacts.`)
+        }
     }
 
     handleInputChange = (event) => {
         // console.log(event.currentTarget.value)
         // console.log(event.currentTarget.name)
-        // console.log(this.state.name)
-        this.setState({ [event.currentTarget.name]: event.currentTarget.value })
+        // console.log(this.props.contacts)
 
+        this.setState({ [event.currentTarget.name]: event.currentTarget.value })
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         //console.log(this.state);
-        this.props.addNewContact(this.state)
+        // console.log(event.currentTarget.name)
+        this.props.addNewContact(this.state);
+        this.resetForm();
+
+    }
+
+    resetForm = () => {
+        this.setState({ name: '', number: '' });
     }
 
 
@@ -29,7 +46,7 @@ class Form extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} >
                 <label>
                     Name
                     <input
@@ -37,9 +54,10 @@ class Form extends Component {
                         name="name"
                         value={this.state.name}
                         onChange={this.handleInputChange}
-                    // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                    // title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-                    // required
+                        onBlur={this.findNameInContact}
+                        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+                        title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+                        required
                     />
                 </label>
                 <label>
@@ -49,13 +67,15 @@ class Form extends Component {
                         name="number"
                         value={this.state.number}
                         onChange={this.handleInputChange}
-                    // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-                    // title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-                    // required
+                        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                        title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+                        required
                     />
 
                 </label>
-                <button type="submit">Add contact</button>
+                <button
+                    type="submit"
+                >Add contact</button>
             </form>
 
         )
@@ -63,6 +83,7 @@ class Form extends Component {
 }
 
 Form.propTypes = {
+    contacts: PropTypes.array.isRequired,
     addNewContact: PropTypes.func.isRequired
 }
 

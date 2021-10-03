@@ -59,13 +59,13 @@ class App extends Component {
 
   render() {
 
-    const { filter } = this.state;
-
+    const { filter, contacts } = this.state;
     const peapleInContact = this.visibleContacts();
+
     return (
       <>
         <h1>Phonebook</h1>
-        <Form addNewContact={this.addNewContact} />
+        <Form contacts={contacts} addNewContact={this.addNewContact} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.getFilterName} />
         <Contacts contacts={peapleInContact} onDeleteContact={this.deleteContact} />
