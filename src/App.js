@@ -52,6 +52,10 @@ class App extends Component {
     );
   };
 
+  resetFiler = () => {
+    this.setState({ filter: '' });
+  }
+
 
 
   render() {
@@ -65,7 +69,7 @@ class App extends Component {
             <h1 className={styles.title}>Phonebook</h1>
             <Form contacts={contacts} addNewContact={this.addNewContact} />
             <h2 className={styles.titleContacts}>Contacts</h2>
-            <Filter value={filter} onChange={this.getFilterName} />
+            <Filter value={filter} onChange={this.getFilterName} resetFiler={this.resetFiler} />
             <Contacts contacts={peapleInContact} onDeleteContact={this.deleteContact} />
           </div>
         </div>
