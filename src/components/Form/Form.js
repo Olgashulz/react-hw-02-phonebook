@@ -12,8 +12,6 @@ class Form extends Component {
 
     findNameInContact = (event) => {
         // console.log(event.currentTarget.value)
-        console.log(this.props.contacts.find((contact) =>
-            contact.name.toLowerCase() === event.currentTarget.value.toLowerCase()))
 
         if (this.props.contacts.find((contact) =>
             contact.name.toLowerCase() === event.currentTarget.value.toLowerCase()

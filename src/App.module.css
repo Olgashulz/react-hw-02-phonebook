@@ -1,15 +1,7 @@
 .container {
-  max-width: 1024px;
-  height: 100vh;
+  max-width: 375px;
   margin: auto;
-  background-image: url('./pictures/Bg3.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-.phonebook {
-  width: 50%;
-  padding-top: 30px;
+  padding: 20px;
 }
 
 .title {
@@ -32,4 +24,24 @@ form {
   display: flex;
   flex-flow: column;
   align-items: flex-end;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 1024px;
+    background-image: url('./pictures/Bg3.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .phonebook {
+    width: 50%;
+    padding-top: 30px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    background-size: 100%;
+  }
 }

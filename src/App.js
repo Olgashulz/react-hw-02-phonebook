@@ -29,7 +29,7 @@ class App extends Component {
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts]
     }))
-    console.log(this.state)
+    // console.log(this.state)
   }
 
   deleteContact = (contactId) => {

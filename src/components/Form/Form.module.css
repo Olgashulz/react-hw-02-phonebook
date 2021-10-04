@@ -7,12 +7,16 @@
   font-size: 14px;
   font-family: 'Spartan', sans-serif;
   font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  width: 100%;
 }
 
 .inputForm {
   margin-left: 5px;
   padding: 5px;
-  width: 300px;
+  width: 100%;
 }
 
 .inputForm {
@@ -46,4 +50,16 @@
 
 .formBtn:disabled {
   pointer-events: none;
+}
+
+@media screen and (min-width: 768px) {
+  .inputForm {
+    width: 300px;
+  }
+
+  .labelForm {
+    flex-direction: row;
+    justify-content: end;
+    align-items: baseline;
+  }
 }
